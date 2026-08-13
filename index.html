@@ -6,66 +6,131 @@
 <title>North Laredo Data Campus — Batch Zero Eligibility &amp; Competitive Verification</title>
 <style>
   :root {
-    --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --bg:#f8fafc; --card:#fff;
-    --accent:#0b3d5c; --accent2:#c45c26; --ok:#166534; --chip:#e0f2fe;
+    --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --bg:#f4f7fa; --card:#fff;
+    --navy:#0b3d5c; --navy2:#145a82; --orange:#c45c26;
+    --yes:#166534; --yes-bg:#dcfce7; --no:#991b1b; --no-bg:#fee2e2;
+    --chip:#e0f2fe;
   }
   *{box-sizing:border-box}
+  html{scroll-padding-top:64px}
   body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45}
-  .wrap{max-width:920px;margin:0 auto;padding:28px 20px 64px}
+  .toolbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,61,92,.97);color:#fff;
+    border-bottom:3px solid var(--orange);
+    display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
+    padding:10px 18px;
+  }
+  .toolbar .prog{font-size:13px;font-weight:650;letter-spacing:.01em}
+  .toolbar .prog span{opacity:.8;font-weight:500}
+  .toolbar .saved{font-size:12px;opacity:.8;margin-right:auto}
+  .toolbar button{
+    appearance:none;border:1px solid rgba(255,255,255,.28);
+    background:rgba(255,255,255,.1);color:#fff;
+    font:inherit;font-size:13px;font-weight:650;
+    padding:6px 12px;border-radius:8px;cursor:pointer;
+  }
+  .toolbar button:hover{background:rgba(255,255,255,.2)}
+  .wrap{max-width:920px;margin:0 auto;padding:22px 20px 72px}
   header{background:linear-gradient(135deg,#0b3d5c 0%,#145a82 60%,#1e3a5f 100%);color:#fff;border-radius:16px;padding:28px;margin-bottom:16px}
   .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
   h1{margin:8px 0 8px;font-size:24px;font-weight:700}
   header p{margin:0;opacity:.94;font-size:14px;max-width:78ch}
   .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:4px 10px;border-radius:999px;font-size:12px}
-  .priority{background:#fff7ed;border:1px solid #fed7aa;border-left:4px solid var(--accent2);border-radius:14px;padding:16px 18px;margin-bottom:14px}
-  .priority h2{margin:0 0 6px;font-size:15px;color:var(--accent2)}
+  .priority{background:#fff7ed;border:1px solid #fed7aa;border-left:4px solid var(--orange);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+  .priority h2{margin:0 0 6px;font-size:15px;color:var(--orange)}
   .howto{font-size:13px;color:var(--muted);margin:0}
   .howto strong{color:var(--ink)}
+  .legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px}
-  .card h2{margin:0 0 6px;font-size:17px;color:var(--accent)}
+  .card h2{margin:0 0 6px;font-size:17px;color:var(--navy)}
   .card .lead{margin:0 0 14px;font-size:13px;color:var(--muted)}
   table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 0}
   th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
   th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
-  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
-  .tag.ok{background:#dcfce7;color:#166534}
-  .tag.warn{background:#ffedd5;color:#92400e}
-  .tag.open{background:#fee2e2;color:#991b1b}
-  .item{border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;margin:0 0 12px;background:#fff}
+  .st{display:inline-block;font-size:11px;font-weight:750;padding:2px 8px;border-radius:999px;letter-spacing:.02em;white-space:nowrap;vertical-align:middle}
+  .st-written{background:#dcfce7;color:#166534}
+  .st-phone{background:#ffedd5;color:#9a3412}
+  .st-thread{background:#ede9fe;color:#5b21b6}
+  .st-public{background:#dbeafe;color:#1e40af}
+  .st-open{background:#fee2e2;color:#991b1b}
+  .st-context{background:#fef9c3;color:#854d0e}
+  .st-pending{background:#ffedd5;color:#9a3412}
+  .st-unanswered{background:#fee2e2;color:#991b1b}
+  .item{border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;margin:0 0 12px;background:#fff;break-inside:avoid}
   .item:last-child{margin-bottom:0}
+  .item.is-yes{border-color:#86efac;box-shadow:inset 3px 0 0 #16a34a}
+  .item.is-no{border-color:#fca5a5;box-shadow:inset 3px 0 0 #dc2626}
   .item-head{display:flex;gap:10px;align-items:flex-start}
   .num{flex:0 0 auto;background:var(--chip);color:#075985;font-weight:700;font-size:12px;padding:3px 8px;border-radius:999px}
+  .claim-wrap{flex:1;min-width:0}
   .claim{font-size:14px;font-weight:600}
+  .stamps{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
   .basis{margin:8px 0 10px;font-size:12px;color:var(--muted)}
-  .yn{display:flex;gap:14px;margin:0 0 10px}
-  .yn-opt{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;cursor:pointer}
+  .yn{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+  .yn-opt{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:14px;font-weight:700;cursor:pointer;
+    border:1.5px solid #cbd5e1;border-radius:10px;
+    padding:7px 14px 7px 10px;background:#f8fafc;user-select:none;
+  }
+  .yn-opt input{
+    appearance:none;-webkit-appearance:none;
+    width:16px;height:16px;margin:0;border-radius:50%;
+    border:2px solid #94a3b8;background:#fff;flex:0 0 auto;
+    display:grid;place-content:center;
+  }
+  .yn-opt input::after{
+    content:"";width:8px;height:8px;border-radius:50%;background:transparent;
+  }
+  .yn-opt.yes:hover{border-color:#16a34a;background:#f0fdf4}
+  .yn-opt.no:hover{border-color:#dc2626;background:#fef2f2}
+  .yn-opt.yes:has(input:checked){border-color:#16a34a;background:var(--yes-bg);color:var(--yes)}
+  .yn-opt.no:has(input:checked){border-color:#dc2626;background:var(--no-bg);color:var(--no)}
+  .yn-opt.yes input:checked{border-color:#16a34a;background:#16a34a}
+  .yn-opt.no input:checked{border-color:#dc2626;background:#dc2626}
+  .yn-opt.yes input:checked::after,.yn-opt.no input:checked::after{background:#fff}
   .field{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:8px}
   textarea{display:block;width:100%;margin-top:4px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:13px;color:var(--ink);resize:vertical;background:#fbfdff}
   textarea:focus{outline:2px solid #93c5fd;border-color:#60a5fa}
+  .print-val{display:none;white-space:pre-wrap;border:1px solid #94a3b8;border-radius:8px;padding:8px 10px;margin-top:4px;font-size:13px;min-height:2.2em;background:#fff}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}.toolbar{padding:10px 12px}}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
   .footer{margin-top:18px;font-size:12px;color:var(--muted)}
   .print-tip{font-size:12px;color:var(--muted);margin-top:8px}
-  blockquote{margin:8px 0 0;padding:10px 12px;background:#f8fafc;border-left:3px solid var(--accent);font-size:13px;color:#334155}
+  blockquote{margin:8px 0 0;padding:10px 12px;background:#f8fafc;border-left:3px solid var(--navy);font-size:13px;color:#334155}
+  a{color:var(--navy2)}
   @media print{
-    body{background:#fff}
-    header{break-inside:avoid}
-    .item{break-inside:avoid}
-    textarea{border:1px solid #94a3b8}
+    .toolbar{display:none !important}
+    body{background:#fff;padding:0;color:#000}
+    .wrap{padding:0;max-width:none}
+    header,.priority,.card,.item{break-inside:avoid;page-break-inside:avoid}
+    header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .st,.chip,.yn-opt,.item.is-yes,.item.is-no{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    textarea{display:none}
+    .print-val{display:block}
+    .yn-opt input{appearance:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
 </style>
 </head>
 <body>
+<div class="toolbar" id="toolbar">
+  <div class="prog" id="progress">0 of 22 answered</div>
+  <div class="saved" id="savedHint">Answers stay in this browser</div>
+  <button type="button" id="btnPrint">Print</button>
+  <button type="button" id="btnJson">Download answers (JSON)</button>
+</div>
+
 <div class="wrap">
 <header>
-  <div class="eyebrow">Regis Partners × Heartland Joule · Verification checklist</div>
+  <div class="eyebrow">Regis Partners × Heartland Joule · Verification checklist · pass 1</div>
   <h1>Batch Zero — Eligibility &amp; Competitive Positioning</h1>
-  <p>North Laredo Data Campus (LLI-2971 / BZ-141 / former Project Sumlin). Dual purpose: (1) confirm Batch Zero eligibility facts, and (2) confirm the competitiveness claims in the Batch Zero infographic. <strong>Highest priority: Section A — verify what we are treating as known / true.</strong></p>
+  <p>North Laredo Data Campus (LLI-2971 / BZ-141 / former Project Sumlin). Dual purpose: (1) confirm Batch Zero eligibility facts, and (2) confirm the competitiveness claims in the Batch Zero infographic. <strong>Highest priority: Section A — verify what we are treating as known-true.</strong></p>
   <div class="meta">
     <span class="chip">ERCOT data as of 28 Jul 2026</span>
-    <span class="chip">Packet updated 13 Aug 2026</span>
+    <span class="chip">Packet 13 Aug 2026 · pass 1</span>
     <span class="chip">AEP written: Paulino 10 Aug</span>
     <span class="chip">AEP Texas · North Laredo 138 kV · Bus 8909</span>
   </div>
@@ -73,7 +138,14 @@
 
 <section class="priority">
   <h2>How to complete</h2>
-  <p class="howto">For each item: check <strong>Yes</strong> or <strong>No</strong>. If No (or partial), use <strong>Clarify / modify assumption</strong>. Use <strong>Notes</strong> for sources, caveats, or follow-ups. Basis lines below already fold in Paulino Lucio III’s 10 Aug email and related AEP thread facts.</p>
+  <p class="howto">Sarah — pick <strong>Yes</strong> or <strong>No</strong> on each item (one answer, not both). If it is off or only partly right, use <strong>Clarify / modify assumption</strong>. Use <strong>Notes</strong> for sources, caveats, or follow-ups. Answers persist in this browser (refresh will not wipe them). Do Section A first.</p>
+  <div class="legend">
+    <span class="st st-written">Written</span>
+    <span class="st st-phone">Phone</span>
+    <span class="st st-thread">Thread</span>
+    <span class="st st-public">Public</span>
+    <span class="st st-open">Open</span>
+  </div>
 </section>
 
 <section class="card">
@@ -81,14 +153,14 @@
   <p class="lead">Source: Paulino Lucio III &lt;plucio@aep.com&gt;, Mon 10 Aug 5:15 PM CT, RE: Project Sumlin (LLI-2971 / BZ-141) — confirming Studied Load classification, plus two open items. He answered Nathan’s last paragraph; Q3 (26RPG004 option) still pending. Q1 (studied vs base, in writing) not addressed in that reply.</p>
   <table>
     <tr><th>Item</th><th>Status</th><th>What AEP actually said</th></tr>
-    <tr><td>LIF / T(D)SP package</td><td><span class="tag ok">Written</span></td><td>BZ-141 submitted to ERCOT 23 Jul. ISD clarifying question 24 Jul; AEP replied same day. ERCOT 27 Jul: LIF processed and determined complete — “does not mean” ERCOT has determined Batch Zero qualification.</td></tr>
-    <tr><td>Further ERCOT correspondence on BZ-141</td><td><span class="tag ok">Written</span></td><td>“We have not received anything else for BZ-141.” (as of 10 Aug)</td></tr>
-    <tr><td>Dynamics / 8 Jul–1 Sep window</td><td><span class="tag warn">Context</span></td><td>That period “was originally only for cleaning up any deficiencies in the dynamics data.” Governor letter: “all dates are subject to change.” Listen to PUCT open meetings. ERCOT still reviewing other BZ LIF/attestations (weekend questions on other BZ #s).</td></tr>
-    <tr><td>Studied vs base</td><td><span class="tag warn">Phone only</span></td><td>Nathan’s 6 Aug call paraphrase. Written Q1 unanswered on 10 Aug.</td></tr>
-    <tr><td>300 MW inside ~490 MW OLL</td><td><span class="tag open">Unanswered</span></td><td>Nathan sent 12 Aug 3:54 PM; Paulino auto-reply only.</td></tr>
-    <tr><td>26RPG004 option 4/5/6</td><td><span class="tag open">Pending</span></td><td>Paulino: “I am pending question number 3.”</td></tr>
-    <tr><td>$15.0M cash</td><td><span class="tag warn">Thread, not Paulino</span></td><td>Scott Nason 12 Aug: “our $15MM cash deposit.” Sims 6 Jul: LC swap + interest on cash.</td></tr>
-    <tr><td>Classification pause</td><td><span class="tag ok">Written</span></td><td>Paulino 4 Aug: AEP received M-A080326-01; no classification notices by 7 Aug; ERCOT to file GCE before 20 Aug PUCT.</td></tr>
+    <tr><td>LIF / T(D)SP package</td><td><span class="st st-written">Written</span></td><td>BZ-141 submitted to ERCOT 23 Jul. ISD clarifying question 24 Jul; AEP replied same day. ERCOT 27 Jul: LIF processed and determined complete — “does not mean” ERCOT has determined Batch Zero qualification.</td></tr>
+    <tr><td>Further ERCOT correspondence on BZ-141</td><td><span class="st st-written">Written</span></td><td>“We have not received anything else for BZ-141.” (as of 10 Aug)</td></tr>
+    <tr><td>Dynamics window</td><td><span class="st st-context">Context</span></td><td>7 Aug–1 Sep originally for dynamics-data deficiencies. Governor letter: all dates subject to change. Listen to PUCT. ERCOT still reviewing other BZ LIF/attestations.</td></tr>
+    <tr><td>Studied vs base</td><td><span class="st st-phone">Phone only</span></td><td>Nathan’s 6 Aug call paraphrase. Written Q1 unanswered on 10 Aug.</td></tr>
+    <tr><td>300 MW inside ~490 MW OLL</td><td><span class="st st-unanswered">Unanswered</span></td><td>Nathan emailed 12 Aug 3:54 PM; auto-reply only.</td></tr>
+    <tr><td>26RPG004 option 4/5/6</td><td><span class="st st-pending">Pending</span></td><td>Paulino: pending Q3.</td></tr>
+    <tr><td>$15.0M cash</td><td><span class="st st-thread">Thread, not Paulino</span></td><td>Scott Nason 12 Aug: “our $15MM cash deposit.” Sims 6 Jul: LC swap + interest on cash.</td></tr>
+    <tr><td>Classification pause</td><td><span class="st st-written">Written</span></td><td>Paulino 4 Aug: AEP received M-A080326-01; no classification by 7 Aug; GCE before 20 Aug PUCT.</td></tr>
   </table>
   <blockquote>ERCOT 27 Jul (as quoted by Paulino): “This email is to notify you that ERCOT has processed the Batch Zero Load Information Form for BZ-141 and determined it is complete. This email does not mean that ERCOT has determined whether the Large Load qualifies for Batch Zero. ERCOT is now processing the other eligibility materials and may have follow-up questions.”</blockquote>
 </section>
@@ -96,335 +168,399 @@
 <section class="card">
   <h2>A. Known-true claims — do these first</h2>
   <p class="lead">Load-bearing statements. If any fail, eligibility and the competitive story both move.</p>
-  
-<div class="item">
-  <div class="item-head"><span class="num">A1</span><div class="claim">Campus is in Batch Zero path with AEP Texas at <strong>300 MW</strong> (LLI-2971 / BZ-141).</div></div>
-  <div class="basis">Regis/AEP package. Officer Letter executed 31 Mar 2026 (300 MW). AEP has not written “300 MW” in the Aug 10 reply.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A1-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A1-no" /> No</label>
+
+<div class="item" data-id="A1">
+  <div class="item-head"><span class="num">A1</span><div class="claim-wrap"><div class="claim">Campus is in Batch Zero path with AEP Texas at <strong>300 MW</strong> (LLI-2971 / BZ-141).</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
+  <div class="basis">Officer Letter executed 31 Mar 2026 (300 MW). AEP did not write “300 MW” in the 10 Aug reply. Internal / open until written.</div>
+  <div class="yn" role="radiogroup" aria-label="A1">
+    <label class="yn-opt yes"><input type="radio" name="A1" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A1" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A1-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A1-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A1-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A1-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">A2</span><div class="claim"><strong>$15.0M</strong> cash financial security posted at $50,000/MW.</div></div>
+
+<div class="item" data-id="A2">
+  <div class="item-head"><span class="num">A2</span><div class="claim-wrap"><div class="claim"><strong>$15.0M</strong> cash financial security posted at $50,000/MW.</div><div class="stamps"><span class="st st-thread">Thread</span></div></div></div>
   <div class="basis">Scott Nason (AEP thread, 12 Aug) referred to “our $15MM cash deposit.” Thomas Sims (6 Jul): cash can be swapped for LC; interest accrues on posted cash. No Paulino one-liner on the $15.0M figure.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A2-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A2-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="A2">
+    <label class="yn-opt yes"><input type="radio" name="A2" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A2" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A2-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A2-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A2-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A2-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">A3</span><div class="claim">Campus is <strong>studied / allocated load</strong> (not base-load exempt).</div></div>
+
+<div class="item" data-id="A3">
+  <div class="item-head"><span class="num">A3</span><div class="claim-wrap"><div class="claim">Campus is <strong>studied / allocated load</strong> (not base-load exempt).</div><div class="stamps"><span class="st st-phone">Phone</span></div></div></div>
   <div class="basis">Phone confirm: Paulino Lucio III, 6 Aug 2026 (Nathan’s punch-list paraphrase). Written Q1 in the 6 Aug email was <strong>not answered</strong> in Paulino’s 10 Aug reply.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A3-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A3-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="A3">
+    <label class="yn-opt yes"><input type="radio" name="A3" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A3" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A3-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A3-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A3-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A3-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">A4</span><div class="claim">Qualifying study / LLIS maturity satisfied before the <strong>10 Jul 2026</strong> cutoff.</div></div>
+
+<div class="item" data-id="A4">
+  <div class="item-head"><span class="num">A4</span><div class="claim-wrap"><div class="claim">Qualifying study / LLIS maturity satisfied before the <strong>10 Jul 2026</strong> cutoff.</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
   <div class="basis">Internal Regis/HJ process claim. No Paulino written confirm found.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A4-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A4-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="A4">
+    <label class="yn-opt yes"><input type="radio" name="A4" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A4" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A4-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A4-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A4-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A4-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">A5</span><div class="claim">Dynamic / other eligibility materials were in with the LIF package (not a known open ERCOT deficiency on BZ-141 as of 10 Aug).</div></div>
+
+<div class="item" data-id="A5">
+  <div class="item-head"><span class="num">A5</span><div class="claim-wrap"><div class="claim">No known open ERCOT deficiency on BZ-141 as of 10 Aug.</div><div class="stamps"><span class="st st-written">Written</span></div></div></div>
   <div class="basis">Paulino 10 Aug: ERCOT 27 Jul email that LIF for BZ-141 was processed and determined complete; “does not mean” ERCOT has determined Batch Zero qualification; “We have not received anything else for BZ-141.” No explicit “model submitted by 10 Jul” line.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A5-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A5-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="A5">
+    <label class="yn-opt yes"><input type="radio" name="A5" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A5" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A5-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A5-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A5-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A5-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">A6</span><div class="claim">T(D)SP / LIF package reached ERCOT by the 24 Jul window.</div></div>
+
+<div class="item" data-id="A6">
+  <div class="item-head"><span class="num">A6</span><div class="claim-wrap"><div class="claim">T(D)SP / LIF package reached ERCOT by the 24 Jul window.</div><div class="stamps"><span class="st st-written">Written</span></div></div></div>
   <div class="basis"><strong>Paulino written 10 Aug:</strong> BZ-141 submitted to ERCOT <strong>23 Jul</strong>. ERCOT ISD clarifying question <strong>24 Jul</strong>; AEP responded same day. ERCOT 27 Jul: LIF processed / complete.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A6-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A6-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="A6">
+    <label class="yn-opt yes"><input type="radio" name="A6" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A6" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A6-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A6-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A6-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A6-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">A7</span><div class="claim">Laredo study area Officer Letter Load ≈ <strong>490 MW</strong> (AEPSC attestation in ERCOT 26RPG004).</div></div>
+
+<div class="item" data-id="A7">
+  <div class="item-head"><span class="num">A7</span><div class="claim-wrap"><div class="claim">Laredo study area Officer Letter Load ≈ <strong>490 MW</strong> (AEPSC attestation in ERCOT 26RPG004).</div><div class="stamps"><span class="st st-public">Public</span></div></div></div>
   <div class="basis">Public ERCOT EIR status PDF. Not an AEP email confirm.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A7-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A7-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="A7">
+    <label class="yn-opt yes"><input type="radio" name="A7" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A7" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A7-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A7-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A7-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A7-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">A8</span><div class="claim">If Campus is inside that 490 MW, share ≈ <strong>61%</strong> (300/490).</div></div>
+
+<div class="item" data-id="A8">
+  <div class="item-head"><span class="num">A8</span><div class="claim-wrap"><div class="claim">If Campus is inside that 490 MW, share ≈ <strong>61%</strong> (300/490).</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
   <div class="basis">Arithmetic. Membership is the open ask: Nathan emailed Paulino 12 Aug (“Yes or no is sufficient”). Only auto-reply as of 13 Aug — <strong>no substantive AEP answer</strong>.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A8-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A8-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="A8">
+    <label class="yn-opt yes"><input type="radio" name="A8" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A8" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A8-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A8-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A8-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A8-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">A9</span><div class="claim">ERCOT system eligible pool ≈ <strong>326 projects / ~205 GW</strong> (data as of 28 Jul 2026).</div></div>
+
+<div class="item" data-id="A9">
+  <div class="item-head"><span class="num">A9</span><div class="claim-wrap"><div class="claim">ERCOT system eligible pool ≈ <strong>326 projects / ~205 GW</strong> (data as of 28 Jul 2026).</div><div class="stamps"><span class="st st-public">Public</span></div></div></div>
   <div class="basis">ERCOT Senate/TAC Batch Zero chart. Public.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A9-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A9-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="A9">
+    <label class="yn-opt yes"><input type="radio" name="A9" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A9" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A9-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A9-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A9-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A9-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">A10</span><div class="claim">Classification notices did <strong>not</strong> issue 7 Aug — still suspended (M-A080326-01).</div></div>
-  <div class="basis">ERCOT Market Notice (still 3 Aug text as of 13 Aug). Paulino 4 Aug: AEP received the notice; ERCOT will not classify by 7 Aug; GCE to be filed before 20 Aug PUCT.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="A10-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="A10-no" /> No</label>
+
+<div class="item" data-id="A10">
+  <div class="item-head"><span class="num">A10</span><div class="claim-wrap"><div class="claim">Classification notices did <strong>not</strong> issue 7 Aug — still suspended (M-A080326-01).</div><div class="stamps"><span class="st st-public">Public</span> <span class="st st-written">Written</span></div></div></div>
+  <div class="basis">ERCOT Market Notice still 3 Aug text as of 13 Aug morning check. Paulino 4 Aug: AEP received M-A080326-01; no classification by 7 Aug; GCE to be filed before 20 Aug PUCT.</div>
+  <div class="yn" role="radiogroup" aria-label="A10">
+    <label class="yn-opt yes"><input type="radio" name="A10" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="A10" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="A10-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="A10-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="A10-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="A10-notes"></div>
   </label>
 </div>
 </section>
 
 <section class="card">
   <h2>B. Eligibility confirmation</h2>
-  <p class="lead">Package integrity, model-cure clock, and remaining AEP writing.</p>
-  
-<div class="item">
-  <div class="item-head"><span class="num">B1</span><div class="claim">Site control / BZ attestations executed and with AEP/ERCOT as required.</div></div>
+  <p class="lead">Package integrity, model-cure clock, and remaining AEP writing. HJ confirm on B1–B2 and B4–B5.</p>
+
+<div class="item" data-id="B1">
+  <div class="item-head"><span class="num">B1</span><div class="claim-wrap"><div class="claim">Site control / BZ attestations executed and with AEP/ERCOT as required.</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
   <div class="basis">Regis package assumptions. Please confirm from HJ records.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="B1-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="B1-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="B1">
+    <label class="yn-opt yes"><input type="radio" name="B1" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="B1" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="B1-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="B1-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="B1-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="B1-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">B2</span><div class="claim">No HJ-known disqualifier that should remove Campus from Batch Zero eligibility.</div></div>
+
+<div class="item" data-id="B2">
+  <div class="item-head"><span class="num">B2</span><div class="claim-wrap"><div class="claim">No HJ-known disqualifier that should remove Campus from Batch Zero eligibility.</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
   <div class="basis">HJ records / process knowledge.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="B2-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="B2-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="B2">
+    <label class="yn-opt yes"><input type="radio" name="B2" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="B2" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="B2-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="B2-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="B2-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="B2-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">B3</span><div class="claim">No dynamics-model deficiency notice has been received for BZ-141, so there may be nothing to “cure” unless HJ has a separate model issue.</div></div>
-  <div class="basis"><strong>Paulino 10 Aug:</strong> 7 Aug–1 Sep “was originally only for cleaning up any deficiencies in the dynamics data.” With delays, ERCOT still reviewing other BZ LIF/attestations (questions on other BZ #s over that weekend). For BZ-141: LIF complete 27 Jul; “We have not received anything else.” Dates “subject to change” after the Governor letter. Please confirm HJ’s read and whether a cure package is still being prepared.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="B3-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="B3-no" /> No</label>
+
+<div class="item" data-id="B3">
+  <div class="item-head"><span class="num">B3</span><div class="claim-wrap"><div class="claim">No dynamics-model deficiency notice has been received for BZ-141; there may be nothing to “cure” unless HJ has a separate model issue.</div><div class="stamps"><span class="st st-written">Written</span></div></div></div>
+  <div class="basis"><strong>Paulino 10 Aug:</strong> 7 Aug–1 Sep “was originally only for cleaning up any deficiencies in the dynamics data.” With delays, ERCOT still reviewing other BZ LIF/attestations. For BZ-141: LIF complete 27 Jul; “We have not received anything else.” Dates “subject to change” after the Governor letter. Please confirm HJ’s read and whether a cure package is still being prepared.</div>
+  <div class="yn" role="radiogroup" aria-label="B3">
+    <label class="yn-opt yes"><input type="radio" name="B3" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="B3" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="B3-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="B3-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="B3-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="B3-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">B4</span><div class="claim">HJ agrees “studied load” is the correct class for competitive / allocation exposure.</div></div>
+
+<div class="item" data-id="B4">
+  <div class="item-head"><span class="num">B4</span><div class="claim-wrap"><div class="claim">HJ agrees “studied load” is the correct class for competitive / allocation exposure.</div><div class="stamps"><span class="st st-phone">Phone</span></div></div></div>
   <div class="basis">AEP phone 6 Aug; written still pending from Paulino Q1.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="B4-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="B4-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="B4">
+    <label class="yn-opt yes"><input type="radio" name="B4" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="B4" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="B4-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="B4-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="B4-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="B4-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">B5</span><div class="claim">HJ can help obtain <strong>written</strong> AEP confirm of (i) studied-load class, (ii) 300 MW inside ~490 MW OLL, (iii) $15.0M posted.</div></div>
+
+<div class="item" data-id="B5">
+  <div class="item-head"><span class="num">B5</span><div class="claim-wrap"><div class="claim">HJ can help obtain <strong>written</strong> AEP confirm of (i) studied-load class, (ii) 300 MW inside ~490 MW OLL, (iii) $15.0M posted.</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
   <div class="basis">Open diligence. 490 MW membership email sent to Paulino 12 Aug, unanswered.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="B5-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="B5-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="B5">
+    <label class="yn-opt yes"><input type="radio" name="B5" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="B5" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="B5-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="B5-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="B5-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="B5-notes"></div>
   </label>
 </div>
 </section>
 
 <section class="card">
   <h2>C. Infographic competitiveness</h2>
-  <p class="lead">Reference: <span class="mono">North_Laredo_Data_Campus_Batch_Zero_Infographic_2026.08.12.html</span>. Thesis: competition is the Laredo electrical study area, not the statewide studied-load pool.</p>
-  
-<div class="item">
-  <div class="item-head"><span class="num">C1</span><div class="claim">Batch Zero allocation is decided electrically (study area / POI screening), so the statewide ~114 GW studied pool is the wrong competitive set.</div></div>
-  <div class="basis">Infographic competitive thesis</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="C1-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="C1-no" /> No</label>
+  <p class="lead">Companion: <strong>Batch Zero infographic 12 Aug — shareable page coming on this site</strong> (<span class="mono">infographic.html</span> next pass). Thesis: competition is the Laredo electrical study area, not the statewide studied-load pool.</p>
+
+<div class="item" data-id="C1">
+  <div class="item-head"><span class="num">C1</span><div class="claim-wrap"><div class="claim">Batch Zero allocation is decided electrically (study area / POI screening), so the statewide ~114 GW studied pool is the wrong competitive set.</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
+  <div class="basis">Infographic competitive thesis.</div>
+  <div class="yn" role="radiogroup" aria-label="C1">
+    <label class="yn-opt yes"><input type="radio" name="C1" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="C1" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="C1-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="C1-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="C1-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="C1-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">C2</span><div class="claim">Local competitive set ≈ ~490 MW OLL; Campus ~300 MW ≈ 61% if inside that pool.</div></div>
+
+<div class="item" data-id="C2">
+  <div class="item-head"><span class="num">C2</span><div class="claim-wrap"><div class="claim">Local competitive set ≈ ~490 MW OLL; Campus ~300 MW ≈ 61% if inside that pool.</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
   <div class="basis">26RPG004 + Campus MW. 61% still contingent on A8 / Paulino 12 Aug ask.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="C2-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="C2-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="C2">
+    <label class="yn-opt yes"><input type="radio" name="C2" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="C2" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="C2-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="C2-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="C2-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="C2-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">C3</span><div class="claim">Nearest meaningful named grid-connected peer is outside the Laredo study area (~155 mi class on our register).</div></div>
-  <div class="basis">Regis competitive register</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="C3-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="C3-no" /> No</label>
+
+<div class="item" data-id="C3">
+  <div class="item-head"><span class="num">C3</span><div class="claim-wrap"><div class="claim">Nearest meaningful named grid-connected peer is outside the Laredo study area (~155 mi class on our register).</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
+  <div class="basis">Regis competitive register.</div>
+  <div class="yn" role="radiogroup" aria-label="C3">
+    <label class="yn-opt yes"><input type="radio" name="C3" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="C3" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="C3-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="C3-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="C3-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="C3-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">C4</span><div class="claim">West Texas / Cameron County large named loads are not in our electrical competitive set.</div></div>
-  <div class="basis">Infographic peer plate</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="C4-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="C4-no" /> No</label>
+
+<div class="item" data-id="C4">
+  <div class="item-head"><span class="num">C4</span><div class="claim-wrap"><div class="claim">West Texas / Cameron County large named loads are not in our electrical competitive set.</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
+  <div class="basis">Infographic peer plate.</div>
+  <div class="yn" role="radiogroup" aria-label="C4">
+    <label class="yn-opt yes"><input type="radio" name="C4" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="C4" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="C4-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="C4-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="C4-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="C4-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">C5</span><div class="claim">The 10 Jul qualifying-study gate is closed — this Batch Zero slot cannot be recreated via legacy LLIS.</div></div>
-  <div class="basis">Batch Zero eligibility rules</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="C5-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="C5-no" /> No</label>
+
+<div class="item" data-id="C5">
+  <div class="item-head"><span class="num">C5</span><div class="claim-wrap"><div class="claim">The 10 Jul qualifying-study gate is closed — this Batch Zero slot cannot be recreated via legacy LLIS.</div><div class="stamps"><span class="st st-public">Public</span></div></div></div>
+  <div class="basis">Batch Zero eligibility rules.</div>
+  <div class="yn" role="radiogroup" aria-label="C5">
+    <label class="yn-opt yes"><input type="radio" name="C5" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="C5" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="C5-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="C5-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="C5-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="C5-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">C6</span><div class="claim">No HJ-known additional Webb/Laredo Officer Letter Load that would materially re-cut ~61%.</div></div>
-  <div class="basis">12 Aug Webb/Laredo scan + HJ knowledge</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="C6-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="C6-no" /> No</label>
+
+<div class="item" data-id="C6">
+  <div class="item-head"><span class="num">C6</span><div class="claim-wrap"><div class="claim">No HJ-known additional Webb/Laredo Officer Letter Load that would materially re-cut ~61%.</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
+  <div class="basis">12 Aug Webb/Laredo scan + HJ knowledge.</div>
+  <div class="yn" role="radiogroup" aria-label="C6">
+    <label class="yn-opt yes"><input type="radio" name="C6" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="C6" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="C6-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="C6-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="C6-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="C6-notes"></div>
   </label>
 </div>
-<div class="item">
-  <div class="item-head"><span class="num">C7</span><div class="claim">Live process risk (classification pause / GCE / model-cure clock) is currently more binding than competitor density.</div></div>
+
+<div class="item" data-id="C7">
+  <div class="item-head"><span class="num">C7</span><div class="claim-wrap"><div class="claim">Live process risk (classification pause / GCE / model-cure clock) is currently more binding than competitor density.</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
   <div class="basis">Infographic gate plate. Paulino 10 Aug: all dates subject to change; listen to PUCT open meetings.</div>
-  <div class="yn">
-    <label class="yn-opt"><input type="checkbox" name="C7-yes" /> Yes</label>
-    <label class="yn-opt"><input type="checkbox" name="C7-no" /> No</label>
+  <div class="yn" role="radiogroup" aria-label="C7">
+    <label class="yn-opt yes"><input type="radio" name="C7" value="yes" /> Yes</label>
+    <label class="yn-opt no"><input type="radio" name="C7" value="no" /> No</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="C7-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+    <div class="print-val" data-for="C7-clarify"></div>
   </label>
   <label class="field">Notes
     <textarea name="C7-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+    <div class="print-val" data-for="C7-notes"></div>
   </label>
 </div>
 </section>
 
 <section class="card">
   <h2>D. Anything else</h2>
-  <div class="item">
-    <div class="item-head"><span class="num">D1</span><div class="claim">Anything else we should correct, add, or stop claiming before we use this externally?</div></div>
+  <div class="item" data-id="D1">
+    <div class="item-head"><span class="num">D1</span><div class="claim-wrap"><div class="claim">Anything else we should correct, add, or stop claiming before we use this externally?</div></div></div>
     <label class="field">Notes / additions
       <textarea name="D1-notes" rows="4" placeholder="Peers, MW figures, process risks, wording to drop…"></textarea>
+      <div class="print-val" data-for="D1-notes"></div>
     </label>
   </div>
 </section>
@@ -443,10 +579,126 @@
       <p style="margin:0;font-size:14px">Nathan Vajdos · Regis Partners<br><span class="mono">Nathan.Vajdos@regis-energy.com</span></p>
     </div>
   </div>
-  <p class="print-tip">Tip: fill in browser, then File → Print → Save as PDF, or reply with the completed HTML.</p>
+  <p class="print-tip">Fill here, then Print (or Save as PDF). Download answers (JSON) if you want a copy of the Yes/No + notes. Answers also stay in this browser.</p>
 </section>
 
-<p class="footer">Regis Partners, LLC · North Laredo Data Campus · ERCOT Batch Zero · For Heartland Joule verification · Updated 13 August 2026 · Internal</p>
+<p class="footer">Regis Partners, LLC · updated 13 Aug 2026 · pass 1 · Internal diligence, shareable link</p>
 </div>
+
+<script>
+(function () {
+  var KEY = "nldc-bz-el-20260813";
+  var IDS = ["A1","A2","A3","A4","A5","A6","A7","A8","A9","A10","B1","B2","B3","B4","B5","C1","C2","C3","C4","C5","C6","C7"];
+  var TOTAL = IDS.length;
+
+  function val(sel) {
+    var el = document.querySelector(sel);
+    return el ? el.value : "";
+  }
+  function setVal(sel, v) {
+    var el = document.querySelector(sel);
+    if (el) el.value = v || "";
+  }
+  function checkedYn(id) {
+    var el = document.querySelector('input[name="' + id + '"]:checked');
+    return el ? el.value : "";
+  }
+  function setYn(id, v) {
+    if (!v) return;
+    var el = document.querySelector('input[name="' + id + '"][value="' + v + '"]');
+    if (el) el.checked = true;
+  }
+  function syncPrint() {
+    document.querySelectorAll(".print-val").forEach(function (div) {
+      var name = div.getAttribute("data-for");
+      var ta = document.querySelector('textarea[name="' + name + '"]');
+      var t = ta ? ta.value : "";
+      div.textContent = t || "—";
+    });
+  }
+  function paintItems() {
+    IDS.forEach(function (id) {
+      var item = document.querySelector('.item[data-id="' + id + '"]');
+      if (!item) return;
+      var v = checkedYn(id);
+      item.classList.toggle("is-yes", v === "yes");
+      item.classList.toggle("is-no", v === "no");
+    });
+  }
+  function progress() {
+    var n = 0;
+    IDS.forEach(function (id) { if (checkedYn(id)) n += 1; });
+    var el = document.getElementById("progress");
+    if (el) el.textContent = n + " of " + TOTAL + " answered";
+  }
+  function collect() {
+    var answers = {};
+    IDS.forEach(function (id) {
+      answers[id] = {
+        yn: checkedYn(id),
+        clarify: val('textarea[name="' + id + '-clarify"]'),
+        notes: val('textarea[name="' + id + '-notes"]')
+      };
+    });
+    answers.D1 = { notes: val('textarea[name="D1-notes"]') };
+    return { key: KEY, savedAt: new Date().toISOString(), answers: answers };
+  }
+  function save() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(collect()));
+      var hint = document.getElementById("savedHint");
+      if (hint) hint.textContent = "Saved in this browser";
+    } catch (e) {}
+    syncPrint();
+    paintItems();
+    progress();
+  }
+  function restore() {
+    var raw;
+    try { raw = localStorage.getItem(KEY); } catch (e) { return; }
+    if (!raw) return;
+    var data;
+    try { data = JSON.parse(raw); } catch (e) { return; }
+    var answers = (data && data.answers) || data || {};
+    IDS.forEach(function (id) {
+      var a = answers[id] || {};
+      setYn(id, a.yn);
+      setVal('textarea[name="' + id + '-clarify"]', a.clarify);
+      setVal('textarea[name="' + id + '-notes"]', a.notes);
+    });
+    if (answers.D1) setVal('textarea[name="D1-notes"]', answers.D1.notes);
+    syncPrint();
+    paintItems();
+    progress();
+  }
+
+  document.addEventListener("change", function (e) {
+    var t = e.target;
+    if (t && t.matches && t.matches('input[type="radio"]')) save();
+  });
+  document.addEventListener("input", function (e) {
+    var t = e.target;
+    if (t && t.matches && t.matches("textarea")) save();
+  });
+  document.getElementById("btnPrint").addEventListener("click", function () {
+    syncPrint();
+    window.print();
+  });
+  document.getElementById("btnJson").addEventListener("click", function () {
+    var blob = new Blob([JSON.stringify(collect(), null, 2)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "nldc-bz-el-20260813-answers.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 500);
+  });
+  window.addEventListener("beforeprint", syncPrint);
+  restore();
+  progress();
+  syncPrint();
+})();
+</script>
 </body>
 </html>
