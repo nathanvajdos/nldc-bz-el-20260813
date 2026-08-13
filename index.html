@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>North Laredo Data Campus — Batch Zero Eligibility &amp; Competitive Verification</title>
+<style>
+  :root {
+    --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --bg:#f8fafc; --card:#fff;
+    --accent:#0b3d5c; --accent2:#c45c26; --ok:#166534; --chip:#e0f2fe;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 20px 64px}
+  header{background:linear-gradient(135deg,#0b3d5c 0%,#145a82 60%,#1e3a5f 100%);color:#fff;border-radius:16px;padding:28px;margin-bottom:16px}
+  .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+  h1{margin:8px 0 8px;font-size:24px;font-weight:700}
+  header p{margin:0;opacity:.94;font-size:14px;max-width:78ch}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);padding:4px 10px;border-radius:999px;font-size:12px}
+  .priority{background:#fff7ed;border:1px solid #fed7aa;border-left:4px solid var(--accent2);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+  .priority h2{margin:0 0 6px;font-size:15px;color:var(--accent2)}
+  .howto{font-size:13px;color:var(--muted);margin:0}
+  .howto strong{color:var(--ink)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+  .card h2{margin:0 0 6px;font-size:17px;color:var(--accent)}
+  .card .lead{margin:0 0 14px;font-size:13px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 0}
+  th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
+  .tag.ok{background:#dcfce7;color:#166534}
+  .tag.warn{background:#ffedd5;color:#92400e}
+  .tag.open{background:#fee2e2;color:#991b1b}
+  .item{border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;margin:0 0 12px;background:#fff}
+  .item:last-child{margin-bottom:0}
+  .item-head{display:flex;gap:10px;align-items:flex-start}
+  .num{flex:0 0 auto;background:var(--chip);color:#075985;font-weight:700;font-size:12px;padding:3px 8px;border-radius:999px}
+  .claim{font-size:14px;font-weight:600}
+  .basis{margin:8px 0 10px;font-size:12px;color:var(--muted)}
+  .yn{display:flex;gap:14px;margin:0 0 10px}
+  .yn-opt{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;cursor:pointer}
+  .field{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:8px}
+  textarea{display:block;width:100%;margin-top:4px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:13px;color:var(--ink);resize:vertical;background:#fbfdff}
+  textarea:focus{outline:2px solid #93c5fd;border-color:#60a5fa}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+  .footer{margin-top:18px;font-size:12px;color:var(--muted)}
+  .print-tip{font-size:12px;color:var(--muted);margin-top:8px}
+  blockquote{margin:8px 0 0;padding:10px 12px;background:#f8fafc;border-left:3px solid var(--accent);font-size:13px;color:#334155}
+  @media print{
+    body{background:#fff}
+    header{break-inside:avoid}
+    .item{break-inside:avoid}
+    textarea{border:1px solid #94a3b8}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Regis Partners × Heartland Joule · Verification checklist</div>
+  <h1>Batch Zero — Eligibility &amp; Competitive Positioning</h1>
+  <p>North Laredo Data Campus (LLI-2971 / BZ-141 / former Project Sumlin). Dual purpose: (1) confirm Batch Zero eligibility facts, and (2) confirm the competitiveness claims in the Batch Zero infographic. <strong>Highest priority: Section A — verify what we are treating as known / true.</strong></p>
+  <div class="meta">
+    <span class="chip">ERCOT data as of 28 Jul 2026</span>
+    <span class="chip">Packet updated 13 Aug 2026</span>
+    <span class="chip">AEP written: Paulino 10 Aug</span>
+    <span class="chip">AEP Texas · North Laredo 138 kV · Bus 8909</span>
+  </div>
+</header>
+
+<section class="priority">
+  <h2>How to complete</h2>
+  <p class="howto">For each item: check <strong>Yes</strong> or <strong>No</strong>. If No (or partial), use <strong>Clarify / modify assumption</strong>. Use <strong>Notes</strong> for sources, caveats, or follow-ups. Basis lines below already fold in Paulino Lucio III’s 10 Aug email and related AEP thread facts.</p>
+</section>
+
+<section class="card">
+  <h2>AEP written status (as of 13 Aug 2026)</h2>
+  <p class="lead">Source: Paulino Lucio III &lt;plucio@aep.com&gt;, Mon 10 Aug 5:15 PM CT, RE: Project Sumlin (LLI-2971 / BZ-141) — confirming Studied Load classification, plus two open items. He answered Nathan’s last paragraph; Q3 (26RPG004 option) still pending. Q1 (studied vs base, in writing) not addressed in that reply.</p>
+  <table>
+    <tr><th>Item</th><th>Status</th><th>What AEP actually said</th></tr>
+    <tr><td>LIF / T(D)SP package</td><td><span class="tag ok">Written</span></td><td>BZ-141 submitted to ERCOT 23 Jul. ISD clarifying question 24 Jul; AEP replied same day. ERCOT 27 Jul: LIF processed and determined complete — “does not mean” ERCOT has determined Batch Zero qualification.</td></tr>
+    <tr><td>Further ERCOT correspondence on BZ-141</td><td><span class="tag ok">Written</span></td><td>“We have not received anything else for BZ-141.” (as of 10 Aug)</td></tr>
+    <tr><td>Dynamics / 8 Jul–1 Sep window</td><td><span class="tag warn">Context</span></td><td>That period “was originally only for cleaning up any deficiencies in the dynamics data.” Governor letter: “all dates are subject to change.” Listen to PUCT open meetings. ERCOT still reviewing other BZ LIF/attestations (weekend questions on other BZ #s).</td></tr>
+    <tr><td>Studied vs base</td><td><span class="tag warn">Phone only</span></td><td>Nathan’s 6 Aug call paraphrase. Written Q1 unanswered on 10 Aug.</td></tr>
+    <tr><td>300 MW inside ~490 MW OLL</td><td><span class="tag open">Unanswered</span></td><td>Nathan sent 12 Aug 3:54 PM; Paulino auto-reply only.</td></tr>
+    <tr><td>26RPG004 option 4/5/6</td><td><span class="tag open">Pending</span></td><td>Paulino: “I am pending question number 3.”</td></tr>
+    <tr><td>$15.0M cash</td><td><span class="tag warn">Thread, not Paulino</span></td><td>Scott Nason 12 Aug: “our $15MM cash deposit.” Sims 6 Jul: LC swap + interest on cash.</td></tr>
+    <tr><td>Classification pause</td><td><span class="tag ok">Written</span></td><td>Paulino 4 Aug: AEP received M-A080326-01; no classification notices by 7 Aug; ERCOT to file GCE before 20 Aug PUCT.</td></tr>
+  </table>
+  <blockquote>ERCOT 27 Jul (as quoted by Paulino): “This email is to notify you that ERCOT has processed the Batch Zero Load Information Form for BZ-141 and determined it is complete. This email does not mean that ERCOT has determined whether the Large Load qualifies for Batch Zero. ERCOT is now processing the other eligibility materials and may have follow-up questions.”</blockquote>
+</section>
+
+<section class="card">
+  <h2>A. Known-true claims — do these first</h2>
+  <p class="lead">Load-bearing statements. If any fail, eligibility and the competitive story both move.</p>
+  
+<div class="item">
+  <div class="item-head"><span class="num">A1</span><div class="claim">Campus is in Batch Zero path with AEP Texas at <strong>300 MW</strong> (LLI-2971 / BZ-141).</div></div>
+  <div class="basis">Regis/AEP package. Officer Letter executed 31 Mar 2026 (300 MW). AEP has not written “300 MW” in the Aug 10 reply.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A1-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A1-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A1-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A1-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">A2</span><div class="claim"><strong>$15.0M</strong> cash financial security posted at $50,000/MW.</div></div>
+  <div class="basis">Scott Nason (AEP thread, 12 Aug) referred to “our $15MM cash deposit.” Thomas Sims (6 Jul): cash can be swapped for LC; interest accrues on posted cash. No Paulino one-liner on the $15.0M figure.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A2-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A2-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A2-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A2-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">A3</span><div class="claim">Campus is <strong>studied / allocated load</strong> (not base-load exempt).</div></div>
+  <div class="basis">Phone confirm: Paulino Lucio III, 6 Aug 2026 (Nathan’s punch-list paraphrase). Written Q1 in the 6 Aug email was <strong>not answered</strong> in Paulino’s 10 Aug reply.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A3-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A3-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A3-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A3-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">A4</span><div class="claim">Qualifying study / LLIS maturity satisfied before the <strong>10 Jul 2026</strong> cutoff.</div></div>
+  <div class="basis">Internal Regis/HJ process claim. No Paulino written confirm found.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A4-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A4-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A4-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A4-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">A5</span><div class="claim">Dynamic / other eligibility materials were in with the LIF package (not a known open ERCOT deficiency on BZ-141 as of 10 Aug).</div></div>
+  <div class="basis">Paulino 10 Aug: ERCOT 27 Jul email that LIF for BZ-141 was processed and determined complete; “does not mean” ERCOT has determined Batch Zero qualification; “We have not received anything else for BZ-141.” No explicit “model submitted by 10 Jul” line.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A5-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A5-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A5-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A5-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">A6</span><div class="claim">T(D)SP / LIF package reached ERCOT by the 24 Jul window.</div></div>
+  <div class="basis"><strong>Paulino written 10 Aug:</strong> BZ-141 submitted to ERCOT <strong>23 Jul</strong>. ERCOT ISD clarifying question <strong>24 Jul</strong>; AEP responded same day. ERCOT 27 Jul: LIF processed / complete.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A6-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A6-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A6-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A6-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">A7</span><div class="claim">Laredo study area Officer Letter Load ≈ <strong>490 MW</strong> (AEPSC attestation in ERCOT 26RPG004).</div></div>
+  <div class="basis">Public ERCOT EIR status PDF. Not an AEP email confirm.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A7-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A7-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A7-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A7-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">A8</span><div class="claim">If Campus is inside that 490 MW, share ≈ <strong>61%</strong> (300/490).</div></div>
+  <div class="basis">Arithmetic. Membership is the open ask: Nathan emailed Paulino 12 Aug (“Yes or no is sufficient”). Only auto-reply as of 13 Aug — <strong>no substantive AEP answer</strong>.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A8-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A8-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A8-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A8-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">A9</span><div class="claim">ERCOT system eligible pool ≈ <strong>326 projects / ~205 GW</strong> (data as of 28 Jul 2026).</div></div>
+  <div class="basis">ERCOT Senate/TAC Batch Zero chart. Public.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A9-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A9-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A9-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A9-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">A10</span><div class="claim">Classification notices did <strong>not</strong> issue 7 Aug — still suspended (M-A080326-01).</div></div>
+  <div class="basis">ERCOT Market Notice (still 3 Aug text as of 13 Aug). Paulino 4 Aug: AEP received the notice; ERCOT will not classify by 7 Aug; GCE to be filed before 20 Aug PUCT.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="A10-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="A10-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="A10-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="A10-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+</section>
+
+<section class="card">
+  <h2>B. Eligibility confirmation</h2>
+  <p class="lead">Package integrity, model-cure clock, and remaining AEP writing.</p>
+  
+<div class="item">
+  <div class="item-head"><span class="num">B1</span><div class="claim">Site control / BZ attestations executed and with AEP/ERCOT as required.</div></div>
+  <div class="basis">Regis package assumptions. Please confirm from HJ records.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="B1-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="B1-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="B1-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="B1-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">B2</span><div class="claim">No HJ-known disqualifier that should remove Campus from Batch Zero eligibility.</div></div>
+  <div class="basis">HJ records / process knowledge.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="B2-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="B2-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="B2-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="B2-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">B3</span><div class="claim">No dynamics-model deficiency notice has been received for BZ-141, so there may be nothing to “cure” unless HJ has a separate model issue.</div></div>
+  <div class="basis"><strong>Paulino 10 Aug:</strong> 7 Aug–1 Sep “was originally only for cleaning up any deficiencies in the dynamics data.” With delays, ERCOT still reviewing other BZ LIF/attestations (questions on other BZ #s over that weekend). For BZ-141: LIF complete 27 Jul; “We have not received anything else.” Dates “subject to change” after the Governor letter. Please confirm HJ’s read and whether a cure package is still being prepared.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="B3-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="B3-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="B3-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="B3-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">B4</span><div class="claim">HJ agrees “studied load” is the correct class for competitive / allocation exposure.</div></div>
+  <div class="basis">AEP phone 6 Aug; written still pending from Paulino Q1.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="B4-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="B4-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="B4-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="B4-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">B5</span><div class="claim">HJ can help obtain <strong>written</strong> AEP confirm of (i) studied-load class, (ii) 300 MW inside ~490 MW OLL, (iii) $15.0M posted.</div></div>
+  <div class="basis">Open diligence. 490 MW membership email sent to Paulino 12 Aug, unanswered.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="B5-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="B5-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="B5-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="B5-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+</section>
+
+<section class="card">
+  <h2>C. Infographic competitiveness</h2>
+  <p class="lead">Reference: <span class="mono">North_Laredo_Data_Campus_Batch_Zero_Infographic_2026.08.12.html</span>. Thesis: competition is the Laredo electrical study area, not the statewide studied-load pool.</p>
+  
+<div class="item">
+  <div class="item-head"><span class="num">C1</span><div class="claim">Batch Zero allocation is decided electrically (study area / POI screening), so the statewide ~114 GW studied pool is the wrong competitive set.</div></div>
+  <div class="basis">Infographic competitive thesis</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="C1-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="C1-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="C1-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="C1-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">C2</span><div class="claim">Local competitive set ≈ ~490 MW OLL; Campus ~300 MW ≈ 61% if inside that pool.</div></div>
+  <div class="basis">26RPG004 + Campus MW. 61% still contingent on A8 / Paulino 12 Aug ask.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="C2-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="C2-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="C2-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="C2-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">C3</span><div class="claim">Nearest meaningful named grid-connected peer is outside the Laredo study area (~155 mi class on our register).</div></div>
+  <div class="basis">Regis competitive register</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="C3-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="C3-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="C3-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="C3-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">C4</span><div class="claim">West Texas / Cameron County large named loads are not in our electrical competitive set.</div></div>
+  <div class="basis">Infographic peer plate</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="C4-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="C4-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="C4-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="C4-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">C5</span><div class="claim">The 10 Jul qualifying-study gate is closed — this Batch Zero slot cannot be recreated via legacy LLIS.</div></div>
+  <div class="basis">Batch Zero eligibility rules</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="C5-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="C5-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="C5-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="C5-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">C6</span><div class="claim">No HJ-known additional Webb/Laredo Officer Letter Load that would materially re-cut ~61%.</div></div>
+  <div class="basis">12 Aug Webb/Laredo scan + HJ knowledge</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="C6-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="C6-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="C6-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="C6-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+<div class="item">
+  <div class="item-head"><span class="num">C7</span><div class="claim">Live process risk (classification pause / GCE / model-cure clock) is currently more binding than competitor density.</div></div>
+  <div class="basis">Infographic gate plate. Paulino 10 Aug: all dates subject to change; listen to PUCT open meetings.</div>
+  <div class="yn">
+    <label class="yn-opt"><input type="checkbox" name="C7-yes" /> Yes</label>
+    <label class="yn-opt"><input type="checkbox" name="C7-no" /> No</label>
+  </div>
+  <label class="field">Clarify / modify assumption
+    <textarea name="C7-clarify" rows="2" placeholder="If No or partial — what should we change?"></textarea>
+  </label>
+  <label class="field">Notes
+    <textarea name="C7-notes" rows="2" placeholder="Optional notes, sources, or follow-ups"></textarea>
+  </label>
+</div>
+</section>
+
+<section class="card">
+  <h2>D. Anything else</h2>
+  <div class="item">
+    <div class="item-head"><span class="num">D1</span><div class="claim">Anything else we should correct, add, or stop claiming before we use this externally?</div></div>
+    <label class="field">Notes / additions
+      <textarea name="D1-notes" rows="4" placeholder="Peers, MW figures, process risks, wording to drop…"></textarea>
+    </label>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Distribution</h2>
+  <div class="grid2">
+    <div>
+      <h3 style="margin:0 0 6px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em">To</h3>
+      <p style="margin:0;font-size:14px">Sarah Johnson · Heartland Joule<br><span class="mono">sjohnson@heartlandjoule.com</span></p>
+    </div>
+    <div>
+      <h3 style="margin:0 0 6px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em">Cc</h3>
+      <p style="margin:0 0 8px;font-size:14px">Andee McCoy · Heartland Joule<br><span class="mono">andee@heartlandjoule.com</span></p>
+      <p style="margin:0 0 8px;font-size:14px">Andy Luu · Heartland Joule<br><span class="mono">aluu@heartlandjoule.com</span></p>
+      <p style="margin:0;font-size:14px">Nathan Vajdos · Regis Partners<br><span class="mono">Nathan.Vajdos@regis-energy.com</span></p>
+    </div>
+  </div>
+  <p class="print-tip">Tip: fill in browser, then File → Print → Save as PDF, or reply with the completed HTML.</p>
+</section>
+
+<p class="footer">Regis Partners, LLC · North Laredo Data Campus · ERCOT Batch Zero · For Heartland Joule verification · Updated 13 August 2026 · Internal</p>
+</div>
+</body>
+</html>
