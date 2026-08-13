@@ -105,6 +105,10 @@
   textarea:focus{outline:2px solid #93c5fd;border-color:#60a5fa}
   .print-val{display:none;white-space:pre-wrap;border:1px solid #94a3b8;border-radius:8px;padding:8px 10px;margin-top:4px;font-size:13px;min-height:2.2em;background:#fff}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .map-pair{margin:4px 0 14px;align-items:start}
+  .map-pair figure{margin:0}
+  .map-pair img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)}
+  .map-pair figcaption{font-size:12px;color:var(--muted);margin-top:6px}
   @media(max-width:720px){.grid2{grid-template-columns:1fr}.toolbar{padding:10px 12px}}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
   .footer{margin-top:18px;font-size:12px;color:var(--muted)}
@@ -227,10 +231,16 @@
   <div class="share61" id="share61">If Yes: Campus share ≈ <strong>61%</strong> (300/490) of the Laredo Officer Letter Load. Arithmetic only — label 61% only while this answer is Yes. Do not treat 61% as independently verified.</div>
 </div>
 
-  <figure class="map-fig" style="margin:4px 0 14px">
-    <img src="maps/06-south-texas-laredo-study-area.png" alt="South Texas / Laredo competitive set" style="width:100%;max-width:720px;border-radius:12px;border:1px solid #e2e8f0">
-    <figcaption style="font-size:12px;color:var(--muted);margin-top:6px">South Texas competitive set from the Batch Zero infographic. 61% only if Q1 is Yes.</figcaption>
-  </figure>
+  <div class="grid2 map-pair">
+    <figure class="map-fig">
+      <img src="maps/06-south-texas-laredo-study-area.png" alt="South Texas / Laredo competitive set">
+      <figcaption>South Texas competitive set from the Batch Zero infographic. 61% only if Q1 is Yes.</figcaption>
+    </figure>
+    <figure class="map-fig">
+      <img src="maps/07-site-aerial-campus.png" alt="North Laredo campus aerial — Mines Rd / parcel">
+      <figcaption>Campus aerial (townhall deck) — Mines Rd / parcel. Companion to the infographic map style, not a replacement.</figcaption>
+    </figure>
+  </div>
 
 <div class="item" data-id="Q2">
   <div class="item-head"><span class="num q">Q2</span><div class="claim-wrap"><div class="claim">Will AEP put studied-load class (not base) in writing?</div><div class="stamps"><span class="st st-phone">Phone 6 Aug only</span></div></div></div>
