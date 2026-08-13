@@ -92,6 +92,14 @@
   .yn-opt.yes input:checked{border-color:#16a34a;background:#16a34a}
   .yn-opt.no input:checked{border-color:#dc2626;background:#dc2626}
   .yn-opt.yes input:checked::after,.yn-opt.no input:checked::after{background:#fff}
+
+  .yn-opt.opt:hover{border-color:#145a82;background:#e0f2fe}
+  .yn-opt.uk:hover{border-color:#c45c26;background:#fff7ed}
+  .yn-opt.opt:has(input:checked){border-color:#145a82;background:#e0f2fe;color:#0b3d5c}
+  .yn-opt.uk:has(input:checked){border-color:#c45c26;background:#ffedd5;color:#9a3412}
+  .yn-opt.opt input:checked{border-color:#145a82;background:#145a82}
+  .yn-opt.uk input:checked{border-color:#c45c26;background:#c45c26}
+  .yn-opt.opt input:checked::after,.yn-opt.uk input:checked::after{background:#fff}
   .field{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:8px}
   textarea{display:block;width:100%;margin-top:4px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:13px;color:var(--ink);resize:vertical;background:#fbfdff}
   textarea:focus{outline:2px solid #93c5fd;border-color:#60a5fa}
@@ -199,7 +207,7 @@
 
 <section class="card">
   <h2>A. Open verification questions — same set as the infographic</h2>
-  <p class="lead">Do these first. Worded to match infographic Q1–Q8 (13 Aug 2026 midday). Exclusive Yes / No, then clarify and notes. If any fail, eligibility and the competitive story both move.</p>
+  <p class="lead">Do these first. Worded to match infographic Q1–Q8 (13 Aug 2026 midday). Exclusive radios, then clarify and notes. If any fail, eligibility and the competitive story both move.</p>
 
 <div class="item" data-id="Q1">
   <div class="item-head"><span class="num q">Q1</span><div class="claim-wrap"><div class="claim">Is the Campus’s 300 MW inside the ~490 MW Laredo Officer Letter Load in 26RPG004?</div><div class="stamps"><span class="st st-unanswered">Unanswered</span> <span class="st st-open">Open</span></div></div></div>
@@ -277,10 +285,12 @@
 
 <div class="item" data-id="Q5">
   <div class="item-head"><span class="num q">Q5</span><div class="claim-wrap"><div class="claim">26RPG004 — option 4, 5, or 6?</div><div class="stamps"><span class="st st-pending">Pending</span></div></div></div>
-  <div class="basis">Paulino pending Q3. Project is Tier 2, $178.0M, ISD Sep 2029, Independent Review now — option not written. Yes = an option is known (name 4, 5, or 6 in Clarify). No = still unknown / pending.</div>
+  <div class="basis">Paulino pending Q3. Project is Tier 2, $178.0M, ISD Sep 2029, Independent Review now — option not written. Pick option 4, 5, or 6, or Don&rsquo;t know.</div>
   <div class="yn" role="radiogroup" aria-label="Q5">
-    <label class="yn-opt yes"><input type="radio" name="Q5" value="yes" /> Yes</label>
-    <label class="yn-opt no"><input type="radio" name="Q5" value="no" /> No</label>
+    <label class="yn-opt opt"><input type="radio" name="Q5" value="4" /> Option 4</label>
+    <label class="yn-opt opt"><input type="radio" name="Q5" value="5" /> Option 5</label>
+    <label class="yn-opt opt"><input type="radio" name="Q5" value="6" /> Option 6</label>
+    <label class="yn-opt uk"><input type="radio" name="Q5" value="unknown" /> Don&rsquo;t know</label>
   </div>
   <label class="field">Clarify / modify assumption
     <textarea name="Q5-clarify" rows="2" placeholder="Specify option 4, 5, or 6 — or what is still unknown"></textarea>
@@ -489,9 +499,13 @@
 
 <script>
 (function () {
-  var KEY = "nldc-bz-el-20260813";
+  var KEY = "nldc-bz-q-20260813";
+  var OLD_KEYS = ["nldc-bz-el-20260813", "nldc-bz-infographic-q-20260813"];
+  var QIDS = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8"];
   var IDS = ["Q1","Q2","Q3","Q4","Q5","Q6","Q7","Q8","B1","B2","C1","C2","C3","C4"];
   var TOTAL = IDS.length;
+  var applying = false;
+  var Q5_YN = { option4: "4", option5: "5", option6: "6", "4": "4", "5": "5", "6": "6", unknown: "unknown" };
 
   function val(sel) {
     var el = document.querySelector(sel);
@@ -506,9 +520,40 @@
     return el ? el.value : "";
   }
   function setYn(id, v) {
-    if (!v) return;
-    var el = document.querySelector('input[name="' + id + '"][value="' + v + '"]');
-    if (el) el.checked = true;
+    document.querySelectorAll('input[name="' + id + '"]').forEach(function (el) {
+      el.checked = !!(v && el.value === v);
+    });
+  }
+  function normYn(id, v) {
+    if (v == null || v === "") return null;
+    if (id === "Q5") return Object.prototype.hasOwnProperty.call(Q5_YN, v) ? Q5_YN[v] : null;
+    if (v === "yes" || v === "no") return v;
+    return null;
+  }
+  function parseStore(raw) {
+    if (!raw) return {};
+    var data;
+    try { data = JSON.parse(raw); } catch (e) { return {}; }
+    if (data && data.answers && typeof data.answers === "object") data = data.answers;
+    return data && typeof data === "object" && !Array.isArray(data) ? data : {};
+  }
+  function readStore() {
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) { return {}; }
+    if (!raw) {
+      for (var i = 0; i < OLD_KEYS.length; i++) {
+        try { raw = localStorage.getItem(OLD_KEYS[i]); } catch (e) { raw = null; }
+        if (raw) break;
+      }
+    }
+    return parseStore(raw);
+  }
+  function writeStore(store) {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(store));
+      var hint = document.getElementById("savedHint");
+      if (hint) hint.textContent = "Saved in this browser";
+    } catch (e) {}
   }
   function syncPrint() {
     document.querySelectorAll(".print-val").forEach(function (div) {
@@ -528,8 +573,10 @@
       var item = document.querySelector('.item[data-id="' + id + '"]');
       if (!item) return;
       var v = checkedYn(id);
-      item.classList.toggle("is-yes", v === "yes");
-      item.classList.toggle("is-no", v === "no");
+      var isYes = v === "yes" || (id === "Q5" && (v === "4" || v === "5" || v === "6"));
+      var isNo = v === "no" || (id === "Q5" && v === "unknown");
+      item.classList.toggle("is-yes", isYes);
+      item.classList.toggle("is-no", isNo);
     });
     paintShare61();
   }
@@ -539,11 +586,11 @@
     var el = document.getElementById("progress");
     if (el) el.textContent = n + " of " + TOTAL + " answered";
   }
-  function collect() {
+  function collectDownload() {
     var answers = {};
     IDS.forEach(function (id) {
       answers[id] = {
-        yn: checkedYn(id),
+        yn: checkedYn(id) || null,
         clarify: val('textarea[name="' + id + '-clarify"]'),
         notes: val('textarea[name="' + id + '-notes"]')
       };
@@ -552,32 +599,50 @@
     return { key: KEY, savedAt: new Date().toISOString(), answers: answers };
   }
   function save() {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(collect()));
-      var hint = document.getElementById("savedHint");
-      if (hint) hint.textContent = "Saved in this browser";
-    } catch (e) {}
+    if (applying) return;
+    var store = readStore();
+    QIDS.forEach(function (id) {
+      var prev = store[id] && typeof store[id] === "object" ? store[id] : {};
+      store[id] = {
+        yn: normYn(id, checkedYn(id)),
+        clarify: val('textarea[name="' + id + '-clarify"]') || ""
+      };
+      var notes = val('textarea[name="' + id + '-notes"]');
+      if (notes) store[id].notes = notes;
+      else if (prev.notes) store[id].notes = prev.notes;
+    });
+    ["B1","B2","C1","C2","C3","C4"].forEach(function (id) {
+      store[id] = {
+        yn: checkedYn(id) || null,
+        clarify: val('textarea[name="' + id + '-clarify"]') || "",
+        notes: val('textarea[name="' + id + '-notes"]') || ""
+      };
+    });
+    store.D1 = { notes: val('textarea[name="D1-notes"]') || "" };
+    writeStore(store);
     syncPrint();
     paintItems();
     progress();
   }
+  function applyStore(store) {
+    applying = true;
+    try {
+      QIDS.concat(["B1","B2","C1","C2","C3","C4"]).forEach(function (id) {
+        var a = store[id] || {};
+        setYn(id, id === "Q5" ? normYn("Q5", a.yn) : (a.yn || null));
+        setVal('textarea[name="' + id + '-clarify"]', a.clarify);
+        setVal('textarea[name="' + id + '-notes"]', a.notes);
+      });
+      if (store.D1) setVal('textarea[name="D1-notes"]', store.D1.notes);
+      syncPrint();
+      paintItems();
+      progress();
+    } finally {
+      applying = false;
+    }
+  }
   function restore() {
-    var raw;
-    try { raw = localStorage.getItem(KEY); } catch (e) { return; }
-    if (!raw) return;
-    var data;
-    try { data = JSON.parse(raw); } catch (e) { return; }
-    var answers = (data && data.answers) || data || {};
-    IDS.forEach(function (id) {
-      var a = answers[id] || {};
-      setYn(id, a.yn);
-      setVal('textarea[name="' + id + '-clarify"]', a.clarify);
-      setVal('textarea[name="' + id + '-notes"]', a.notes);
-    });
-    if (answers.D1) setVal('textarea[name="D1-notes"]', answers.D1.notes);
-    syncPrint();
-    paintItems();
-    progress();
+    applyStore(readStore());
   }
 
   document.addEventListener("change", function (e) {
@@ -593,16 +658,19 @@
     window.print();
   });
   document.getElementById("btnJson").addEventListener("click", function () {
-    var blob = new Blob([JSON.stringify(collect(), null, 2)], { type: "application/json" });
+    var blob = new Blob([JSON.stringify(collectDownload(), null, 2)], { type: "application/json" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "nldc-bz-el-20260813-answers.json";
+    a.download = "nldc-bz-q-20260813-answers.json";
     document.body.appendChild(a);
     a.click();
     a.remove();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 500);
   });
   window.addEventListener("beforeprint", syncPrint);
+  window.addEventListener("storage", function (e) {
+    if (e.key === KEY || e.key === null) restore();
+  });
   restore();
   progress();
   syncPrint();
