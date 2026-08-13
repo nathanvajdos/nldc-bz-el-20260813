@@ -119,7 +119,8 @@
     .toolbar{display:none !important}
     body{background:#fff;padding:0;color:#000}
     .wrap{padding:0;max-width:none}
-    header,.priority,.card,.item{break-inside:avoid;page-break-inside:avoid}
+    header,.priority,.card,.item,.map-fig{break-inside:avoid;page-break-inside:avoid}
+    .map-fig img{max-width:100% !important}
     header{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .st,.chip,.yn-opt,.item.is-yes,.item.is-no,.share61{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     textarea{display:none}
@@ -218,6 +219,11 @@
   <div class="share61" id="share61">If Yes: Campus share ≈ <strong>61%</strong> (300/490) of the Laredo Officer Letter Load. Arithmetic only — label 61% only while this answer is Yes. Do not treat 61% as independently verified.</div>
 </div>
 
+  <figure class="map-fig" style="margin:4px 0 14px">
+    <img src="maps/06-south-texas-laredo-study-area.png" alt="South Texas / Laredo competitive set" style="width:100%;max-width:720px;border-radius:12px;border:1px solid #e2e8f0">
+    <figcaption style="font-size:12px;color:var(--muted);margin-top:6px">South Texas competitive set from the Batch Zero infographic. 61% only if Q1 is Yes.</figcaption>
+  </figure>
+
 <div class="item" data-id="Q2">
   <div class="item-head"><span class="num q">Q2</span><div class="claim-wrap"><div class="claim">Will AEP put studied-load class (not base) in writing?</div><div class="stamps"><span class="st st-phone">Phone 6 Aug only</span></div></div></div>
   <div class="basis">Phone confirm: Paulino Lucio III, 6 Aug 2026 (Nathan’s punch-list paraphrase). Written studied-vs-base ask in the 6 Aug email was <strong>not answered</strong> in Paulino’s 10 Aug reply. Yes = AEP will / has put it in writing; No = still phone-only / will not.</div>
@@ -288,7 +294,7 @@
 
 <div class="item" data-id="Q6">
   <div class="item-head"><span class="num q">Q6</span><div class="claim-wrap"><div class="claim">Any additional Webb/Laredo Officer Letter Load that would re-cut ~61%?</div><div class="stamps"><span class="st st-open">Open</span></div></div></div>
-  <div class="basis">HJ/AEP: anything beyond the 26RPG004 ~490 MW snapshot? 12 Aug Webb/Laredo scan found no material re-cut signal on public social/press. Yes = additional OLL exists that would re-cut the share; No = none known. The ~61% label itself applies only if Q1 is Yes.</div>
+  <div class="basis">HJ/AEP: anything beyond the 26RPG004 ~490 MW snapshot? 12 Aug Webb/Laredo scan found no material re-cut signal on public social/press. Yes = additional OLL exists that would re-cut the share; No = none known. The ~61% label itself applies only if Q1 is Yes. Competitive set is the South Texas / Laredo study area in the map above — not repeated here.</div>
   <div class="yn" role="radiogroup" aria-label="Q6">
     <label class="yn-opt yes"><input type="radio" name="Q6" value="yes" /> Yes</label>
     <label class="yn-opt no"><input type="radio" name="Q6" value="no" /> No</label>
